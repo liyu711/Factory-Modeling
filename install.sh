@@ -1,0 +1,1 @@
+sudo -H python -m pip install -U -r requirements.txt
