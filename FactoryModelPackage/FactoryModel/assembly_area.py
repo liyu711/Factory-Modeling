@@ -1,7 +1,7 @@
 import numpy
 
 class AssemblyArea(object):
-	"""docstring for AssemblyArea"""
+
 	def __init__(self, length, width):
 		self.length = length
 		self.width = width
