@@ -38,6 +38,9 @@ class WorkPiece(object):
 
 		return status
 
+	def check_if_workpiece_reaches_its_destination(self):
+		return self.current_point[0] == self.fin_point[0] and self.current_point[1] == self.fin_point[1]
+
 	def move(self):
 		current_x = self.current_point[0]
 		current_y = self.current_point[1]

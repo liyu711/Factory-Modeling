@@ -26,3 +26,13 @@ class WorkPieceTestCase(unittest.TestCase):
 		print(self.workpiece2.get_current_point())
 		self.assertEqual(self.workpiece2.get_current_point()[0], 3)
 		self.assertEqual(self.workpiece2.get_current_point()[1], 3)
+
+	def test_if_reaches_destination(self):
+		self.workpiece1.reset_position()
+		false = self.workpiece1.check_if_workpiece_reaches_its_destination()
+		self.workpiece2.reset_position()
+		self.workpiece2.set_current_point(numpy.array([3,3,3]))
+		true = self.workpiece2.check_if_workpiece_reaches_its_destination()
+
+		self.assertEqual(false, False)
+		self.assertEqual(true, True)
