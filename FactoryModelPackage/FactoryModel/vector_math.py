@@ -1,5 +1,9 @@
+import math
+import numpy
+
 class VectorMath(object):
 	"""docstring for VectorMath"""
+	
 	def __init__(self):
 		pass
 
@@ -13,7 +17,7 @@ class VectorMath(object):
 		return magnitude
 
 	@staticmethod
-	def get_magnitude(vector):
+	def get_single_magnitude(vector):
 		magnitude = numpy.linalg.norm(vector)
 
 		return magnitude 
