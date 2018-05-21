@@ -1,5 +1,6 @@
 import numpy 
 import math
+from FactoryModel import *
 
 class Factory(object):
 	"""docstring for Factory"""
@@ -16,4 +17,11 @@ class Factory(object):
 	def reset_work_pieces(self):
 		self.work_pieces = numpy.array([])
 
-	
+	def arrange(self):
+		cost = 0
+		for work_piece in work_pieces:
+			while work_piece.get_current_point() != work_piece.get_final_position():
+				work_piece.move()
+				cost += 1
+
+		return cost	
