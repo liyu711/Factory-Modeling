@@ -24,14 +24,19 @@ class Factory(object):
 	def arrange(self):
 		cost = 0
 		for work_piece1 in self.work_pieces:
+			print("outer for")
 			while work_piece1.current_point[0] != work_piece1.fin_point[0] and work_piece1.current_point[1] != work_piece1.fin_point[1]:
+				print("while")
 				for work_piece2 in self.work_pieces:
+					print("inner for")
 					if work_piece2.ini_point[0] == work_piece1.ini_point[0] and work_piece2.ini_point[1] == work_piece2.ini_point[1]:
+						print("continue")
 						continue
 					else:
+						print("find")
 						work_piece1.find_path(work_piece2)
 				work_piece1.move()
 				cost += 1
 			
 
-		return cost	
+		return cost

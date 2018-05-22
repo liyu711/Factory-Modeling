@@ -55,3 +55,12 @@ class WorkPieceTestCase(unittest.TestCase):
 
 		self.assertEqual(false, False)
 		self.assertEqual(true, True)
+
+	# def test_move(self):
+	# 	self.workpiece3.reset_position()
+	# 	self.workpiece3.reset_path()
+	# 	self.workpiece2.reset_position()
+	# 	self.workpiece2.reset_path()
+
+	# 	self.workpiece3.find_path(self.workpiece2)
+	# 	self.workpiece3.move()
