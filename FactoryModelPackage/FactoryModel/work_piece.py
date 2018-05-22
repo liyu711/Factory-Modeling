@@ -1,4 +1,5 @@
 import numpy
+import math
 from FactoryModel import VectorMath
 
 class WorkPiece(object):
@@ -15,6 +16,16 @@ class WorkPiece(object):
 			numpy.array([self.current_point[0] - length/2, self.current_point[1] + width/2]),
 			numpy.array([self.current_point[0] + length/2, self.current_point[1] - width/2]),
 			numpy.array([self.current_point[0] + length/2, self.current_point[1] + width/2])
+		]
+		self.where_should_i_go = [
+			numpy.array([self.current_point[0] -1, self.current_point[1] -1]),
+			numpy.array([self.current_point[0] -1, self.current_point[1]]),
+			numpy.array([self.current_point[0] -1, self.current_point[1] +1]),
+			numpy.array([self.current_point[0], self.current_point[1] +1]),
+			numpy.array([self.current_point[0], self.current_point[1] -1]),
+			numpy.array([self.current_point[0] +1, self.current_point[1] -1]),
+			numpy.array([self.current_point[0] +1, self.current_point[1]]),
+			numpy.array([self.current_point[0] +1, self.current_point[1] +1])
 		]
 
 	def get_current_point(self):
@@ -41,22 +52,20 @@ class WorkPiece(object):
 	def check_if_workpiece_reaches_its_destination(self):
 		return self.current_point[0] == self.fin_point[0] and self.current_point[1] == self.fin_point[1]
 
+	def find_path(self, another_workpiece):
+		for point in self.where_should_i_go:
+			check_if_x_in_range = (another_workpiece.boundary_points[0][0] - self.length/2) < point[0] and point[0] < (another_workpiece.boundary_points[3][0] + self.length/2)
+			check_if_y_in_range = (another_workpiece.boundary_points[0][1] - self.width/2) < point[0] and point[0] < (another_workpiece.boundary_points[3][1] + self.width/2)
+			if check_if_y_in_range and check_if_y_in_range:
+				self.where_should_i_go.remove(point)
+
 	def move(self):
 		current_x = self.current_point[0]
 		current_y = self.current_point[1]
 		min_magnitude = 10000000000000
 		point_to_go = self.current_point
-		where_should_i_go = [
-			numpy.array([current_x -1, current_y +1]),
-			numpy.array([current_x -1, current_y]),
-			numpy.array([current_x -1, current_y -1]),
-			numpy.array([current_x, current_y +1]),
-			numpy.array([current_x, current_y -1]),
-			numpy.array([current_x +1, current_y +1]),
-			numpy.array([current_x +1, current_y]),
-			numpy.array([current_x +1, current_y -1])
-		]
-		for point in where_should_i_go:
+
+		for point in self.where_should_i_go:
 			distance_magnitude_to_the_end = VectorMath.get_magnitude(self.fin_point, point)
 			print(distance_magnitude_to_the_end)
 			if distance_magnitude_to_the_end < min_magnitude:
@@ -64,4 +73,38 @@ class WorkPiece(object):
 				point_to_go = point
 
 		self.current_point = point_to_go
+		self.where_should_i_go = [
+			numpy.array([self.current_point[0] -1, self.current_point[1] -1]),
+			numpy.array([self.current_point[0] -1, self.current_point[1]]),
+			numpy.array([self.current_point[0] -1, self.current_point[1] +1]),
+			numpy.array([self.current_point[0], self.current_point[1] +1]),
+			numpy.array([self.current_point[0], self.current_point[1] -1]),
+			numpy.array([self.current_point[0] +1, self.current_point[1] -1]),
+			numpy.array([self.current_point[0] +1, self.current_point[1]]),
+			numpy.array([self.current_point[0] +1, self.current_point[1] +1])
+		]
+
+	# def move(self):
+	# 	current_x = self.current_point[0]
+	# 	current_y = self.current_point[1]
+	# 	min_magnitude = 10000000000000
+	# 	point_to_go = self.current_point
+	# 	where_should_i_go = [
+	# 		numpy.array([current_x -1, current_y +1]),
+	# 		numpy.array([current_x -1, current_y]),
+	# 		numpy.array([current_x -1, current_y -1]),
+	# 		numpy.array([current_x, current_y +1]),
+	# 		numpy.array([current_x, current_y -1]),
+	# 		numpy.array([current_x +1, current_y +1]),
+	# 		numpy.array([current_x +1, current_y]),
+	# 		numpy.array([current_x +1, current_y -1])
+	# 	]
+	# 	for point in where_should_i_go:
+	# 		distance_magnitude_to_the_end = VectorMath.get_magnitude(self.fin_point, point)
+	# 		print(distance_magnitude_to_the_end)
+	# 		if distance_magnitude_to_the_end < min_magnitude:
+	# 			min_magnitude = distance_magnitude_to_the_end
+	# 			point_to_go = point
+
+	# 	self.current_point = point_to_go
 

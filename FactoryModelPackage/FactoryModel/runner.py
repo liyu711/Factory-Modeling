@@ -1,8 +1,10 @@
 from FactoryModel import *
 import numpy
+import itertools
 
 assembly_area = AssemblyArea(80,  80,  70, 110)
-work_pieces = [
+costs = numpy.array([])
+original_work_pieces = [
 	WorkPiece(10,   2, 133, 130,  83,  81),
 	WorkPiece(10,   2, 143, 130,  48,  81),
 	WorkPiece(10,   2, 153, 130,  48, 139),
@@ -19,6 +21,6 @@ work_pieces = [
 	WorkPiece(40,   2, 180, 155,  83,  90),
 	WorkPiece(40,   2, 180, 150,  83, 130)
 ]
-factory = Factory(240, 200, 105, 100)
-for workpiece in work_pieces:
-	factory.add_workpiece(workpiece)
+work_pieces_combinations = itertools.permuatation(original_work_pieces, 15)
+
+for work_pieces in work_pieces_combinations:

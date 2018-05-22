@@ -20,4 +20,4 @@ class VectorMath(object):
 	def get_single_magnitude(vector):
 		magnitude = numpy.linalg.norm(vector)
 
-		return magnitude 
+		return magnitude

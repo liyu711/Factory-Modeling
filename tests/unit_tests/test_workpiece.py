@@ -1,5 +1,6 @@
 import unittest
 import numpy
+import itertools
 from FactoryModel import *
 
 class WorkPieceTestCase(unittest.TestCase):
@@ -11,6 +12,7 @@ class WorkPieceTestCase(unittest.TestCase):
 		self.init_point1 = numpy.array([90,30])
 		self.fin_point1 = numpy.array([50,110])
 		self.workpiece2 = WorkPiece(2, 1, 0, 0, 3, 3)
+		self.workpiece3 = WorkPiece(2, 1, -2, 0, 5, 0)
 	
 	def test_init(self):
 		self.assertEqual(self.workpiece1.length, self.length1)
@@ -18,14 +20,20 @@ class WorkPieceTestCase(unittest.TestCase):
 		self.assertEqual(self.workpiece1.ini_point[0], self.init_point1[0])
 		self.assertEqual(self.workpiece1.ini_point[1], self.init_point1[1])
 
-	def test_move(self):
-		self.workpiece2.reset_position()
-		self.workpiece2.move()
-		self.workpiece2.move()
-		self.workpiece2.move()
-		print(self.workpiece2.get_current_point())
-		self.assertEqual(self.workpiece2.get_current_point()[0], 3)
-		self.assertEqual(self.workpiece2.get_current_point()[1], 3)
+	# def test_move(self):
+	# 	self.workpiece2.reset_position()
+	# 	self.workpiece2.move()
+	# 	self.workpiece2.move()
+	# 	self.workpiece2.move()
+	# 	print(self.workpiece2.get_current_point())
+	# 	self.assertEqual(self.workpiece2.get_current_point()[0], 3)
+	# 	self.assertEqual(self.workpiece2.get_current_point()[1], 3)
+
+	# def test_find_path(self):
+	# 	self.workpiece2.reset_position()
+	# 	self.workpiece3.reset_position()
+		
+
 
 	def test_if_reaches_destination(self):
 		self.workpiece1.reset_position()
@@ -36,3 +44,9 @@ class WorkPieceTestCase(unittest.TestCase):
 
 		self.assertEqual(false, False)
 		self.assertEqual(true, True)
+
+	def test_intertool(self):
+		stuff = [1,2,3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+		items = itertools.permutations(stuff, 15)
+		for item in items:
+			self.assertEqual(item, item)
