@@ -74,9 +74,7 @@ class WorkPiece(object):
 			# print(another_workpiece.boundary_points[3][0] - self.length/2)
 			# print(another_workpiece.boundary_points[3][1] - self.length/2)
 			# print(self.where_should_i_go[i][1])
-			print(check_if_x_in_range)
 			check_if_y_in_range = (another_workpiece.boundary_points[0][1] - self.width/2) < self.where_should_i_go[i][1] and self.where_should_i_go[i][1] < (another_workpiece.boundary_points[3][1] + self.width/2)
-			print(check_if_y_in_range)
 			if check_if_x_in_range and check_if_y_in_range:
 				del self.where_should_i_go[i]
 				i -= 1
@@ -93,7 +91,6 @@ class WorkPiece(object):
 
 		for point in self.where_should_i_go:
 			distance_magnitude_to_the_end = VectorMath.get_magnitude(self.fin_point, point)
-			print(distance_magnitude_to_the_end)
 			if distance_magnitude_to_the_end < min_magnitude:
 				min_magnitude = distance_magnitude_to_the_end
 				point_to_go = point
