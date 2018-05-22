@@ -11,8 +11,8 @@ class WorkPieceTestCase(unittest.TestCase):
 		self.width1 = 50
 		self.init_point1 = numpy.array([90,30])
 		self.fin_point1 = numpy.array([50,110])
-		self.workpiece2 = WorkPiece(2, 1, 0, 0, 3, 3)
-		self.workpiece3 = WorkPiece(2, 1, -2, 0, 5, 0)
+		self.workpiece2 = WorkPiece(2, 2, 0, 0, 3, 3)
+		self.workpiece3 = WorkPiece(2, 2, -2, 0, 5, 0)
 	
 	def test_init(self):
 		self.assertEqual(self.workpiece1.length, self.length1)
@@ -33,7 +33,18 @@ class WorkPieceTestCase(unittest.TestCase):
 	# 	self.workpiece2.reset_position()
 	# 	self.workpiece3.reset_position()
 		
+	def test_removal(self):
+		stuff = [self.init_point1, self.fin_point1]
+		stuff.remove(self.init_point1)
+		print(stuff)
 
+	def test_find_path(self):
+		self.workpiece2.reset_position()
+		self.workpiece2.reset_path()
+		self.workpiece3.reset_position()
+		self.workpiece3.reset_path()
+		self.workpiece3.find_path(self.workpiece2)
+		print(self.workpiece3.where_should_i_go)
 
 	def test_if_reaches_destination(self):
 		self.workpiece1.reset_position()
@@ -44,9 +55,3 @@ class WorkPieceTestCase(unittest.TestCase):
 
 		self.assertEqual(false, False)
 		self.assertEqual(true, True)
-
-	def test_intertool(self):
-		stuff = [1,2,3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-		items = itertools.permutations(stuff, 15)
-		for item in items:
-			self.assertEqual(item, item)

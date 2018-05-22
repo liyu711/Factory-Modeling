@@ -24,7 +24,7 @@ original_work_pieces = [
 	WorkPiece(40,   2, 180, 155,  83,  90),
 	WorkPiece(40,   2, 180, 150,  83, 130)
 ]
-work_pieces_combinations = itertools.permuatation(original_work_pieces, 15)
+work_pieces_combinations = itertools.permutations(original_work_pieces, 15)
 
 for work_pieces in work_pieces_combinations:
 	factory.reset_work_pieces()

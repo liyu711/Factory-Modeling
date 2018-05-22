@@ -31,6 +31,18 @@ class WorkPiece(object):
 	def get_current_point(self):
 		return self.current_point
 
+	def reset_path(self):
+		self.where_should_i_go = [
+			numpy.array([self.ini_point[0] -1, self.ini_point[1] -1]),
+			numpy.array([self.ini_point[0] -1, self.ini_point[1]]),
+			numpy.array([self.ini_point[0] -1, self.ini_point[1] +1]),
+			numpy.array([self.ini_point[0], self.ini_point[1] +1]),
+			numpy.array([self.ini_point[0], self.ini_point[1] -1]),
+			numpy.array([self.ini_point[0] +1, self.ini_point[1] -1]),
+			numpy.array([self.ini_point[0] +1, self.ini_point[1]]),
+			numpy.array([self.ini_point[0] +1, self.ini_point[1] +1])
+		]
+
 	def set_current_point(self, new_point):
 		self.current_point = new_point
 
@@ -53,15 +65,18 @@ class WorkPiece(object):
 		return self.current_point[0] == self.fin_point[0] and self.current_point[1] == self.fin_point[1]
 
 	def find_path(self, another_workpiece):
-		for point in self.where_should_i_go:
-			check_if_x_in_range = (another_workpiece.boundary_points[0][0] - self.length/2) < point[0] and point[0] < (another_workpiece.boundary_points[3][0] + self.length/2)
-			check_if_y_in_range = (another_workpiece.boundary_points[0][1] - self.width/2) < point[0] and point[0] < (another_workpiece.boundary_points[3][1] + self.width/2)
+		for i in range(len(self.where_should_i_go)-1):
+			check_if_x_in_range = (another_workpiece.boundary_points[0][0] - self.length/2) < self.where_should_i_go[i][0] and self.where_should_i_go[i][0] < (another_workpiece.boundary_points[3][0] + self.length/2)
+			check_if_y_in_range = (another_workpiece.boundary_points[0][1] - self.width/2) < self.where_should_i_go[i][0] and self.where_should_i_go[i][0] < (another_workpiece.boundary_points[3][1] + self.width/2)		
 			if check_if_y_in_range and check_if_y_in_range:
-				self.where_should_i_go.remove(point)
+				del self.where_should_i_go[i]
+		# for point in self.where_should_i_go:
+		# 	check_if_x_in_range = (another_workpiece.boundary_points[0][0] - self.length/2) < point[0] and point[0] < (another_workpiece.boundary_points[3][0] + self.length/2)
+		# 	check_if_y_in_range = (another_workpiece.boundary_points[0][1] - self.width/2) < point[0] and point[0] < (another_workpiece.boundary_points[3][1] + self.width/2)
+		# 	if check_if_y_in_range and check_if_y_in_range:
+		# 		self.where_should_i_go.remove(point)
 
 	def move(self):
-		current_x = self.current_point[0]
-		current_y = self.current_point[1]
 		min_magnitude = 10000000000000
 		point_to_go = self.current_point
 
