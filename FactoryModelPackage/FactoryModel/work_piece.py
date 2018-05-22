@@ -27,6 +27,10 @@ class WorkPiece(object):
 			numpy.array([self.current_point[0] +1, self.current_point[1]]),
 			numpy.array([self.current_point[0] +1, self.current_point[1] +1])
 		]
+		self.actual_path = []
+
+	def reset_actual_path(self):
+		self.actual_path = []
 
 	def get_current_point(self):
 		return self.current_point
@@ -96,6 +100,7 @@ class WorkPiece(object):
 				point_to_go = point
 
 		self.current_point = point_to_go
+		self.actual_path.append(point_to_go)
 		self.where_should_i_go = [
 			numpy.array([self.current_point[0] -1, self.current_point[1] -1]),
 			numpy.array([self.current_point[0] -1, self.current_point[1]]),

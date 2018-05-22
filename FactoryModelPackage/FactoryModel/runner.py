@@ -5,7 +5,7 @@ import itertools
 factory = Factory(240, 200, 105, 100)
 assembly_area = AssemblyArea(80,  80,  70, 110)
 costs = numpy.array([])
-min_cost = 999999999999999999999
+min_cost = 999999999999
 min_index = 0
 original_work_pieces = [
 	WorkPiece(10,   2, 133, 130,  83,  81),
@@ -24,17 +24,29 @@ original_work_pieces = [
 	WorkPiece(40,   2, 180, 155,  83,  90),
 	WorkPiece(40,   2, 180, 150,  83, 130)
 ]
+
 work_pieces_combinations = itertools.permutations(original_work_pieces, 15)
 
+
 for work_pieces in work_pieces_combinations:
+	print("processing")
 	factory.reset_work_pieces()
 	factory.add_workpieces(work_pieces)
 	cost = factory.arrange()
 	costs = numpy.hstack([costs, cost])
 
 for i in range(len(costs)):
+	print("sorting")
 	if costs[i] < min_cost:
 		min_cost = costs[i]
 		min_index = i
 
-print(work_pieces_combinations[i])
+print("order =" + work_pieces_combinations[i])
+print("least cost =" + min_cost)
+
+factory.reset_work_pieces()
+factory.add_workpieces(work_pieces_combinations[i])
+factory.sort()
+print("Path for every single workpiece")
+for work_piece in factory.work_pieces:
+	print work_piece.actual_path
