@@ -2,8 +2,11 @@ from FactoryModel import *
 import numpy
 import itertools
 
+factory = Factory(240, 200, 105, 100)
 assembly_area = AssemblyArea(80,  80,  70, 110)
 costs = numpy.array([])
+min_cost = 999999999999999999999
+min_index = 0
 original_work_pieces = [
 	WorkPiece(10,   2, 133, 130,  83,  81),
 	WorkPiece(10,   2, 143, 130,  48,  81),
@@ -24,3 +27,14 @@ original_work_pieces = [
 work_pieces_combinations = itertools.permuatation(original_work_pieces, 15)
 
 for work_pieces in work_pieces_combinations:
+	factory.reset_work_pieces()
+	factory.add_workpieces(work_pieces)
+	cost = factory.arrange()
+	costs = numpy.hstack([costs, cost])
+
+for i in range(len(costs)):
+	if costs[i] < min_cost:
+		min_cost = costs[i]
+		min_index = i
+
+print(work_pieces_combinations[i])
