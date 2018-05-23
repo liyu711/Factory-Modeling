@@ -6,7 +6,7 @@ Add a remote to your fork:
 
 
 
-git remote add official https://github.com/liyu711/Factory-Modeling.git
+    git remote add official https://github.com/liyu711/Factory-Modeling.git
 
 
 
