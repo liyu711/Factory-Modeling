@@ -1,5 +1,5 @@
 # Factory-Modeling
-Code for a math competition
+Code for a math homework
 
 
 The way to update your fork is 
